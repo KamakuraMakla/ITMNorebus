@@ -1,0 +1,236 @@
+/* 共通部分
+---------------------------------*/
+
+body {
+    font-family: "MS明朝","Zen Antique";
+    color: #f8f4f6;
+    background-color: #0d0d0d;
+    line-height: 1.0;
+    overflow-x: clip;
+}
+
+
+
+.centered_text {
+    text-align: center;
+}
+
+/* タイトル
+---------------------------------*/
+
+section.title {
+    padding-top: 60%;
+}
+
+section.title .subtitle {
+    position: absolute;
+    left: -5%;
+    top: 40%;
+    color: #0d0d0d;
+    background-color: #f8f4f6;
+    width: fit-content;
+    padding: 2%;
+    padding-left: 13%;
+    padding-right: 2.5%;
+}
+
+h3.leftside{
+    position: absolute;
+    left: 10%;
+    top: 23%;
+}
+
+div.same-line {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+section.title h1, 
+section.title h2, 
+section.title h3 {
+    margin: 0;
+}
+
+.shadow{
+    text-shadow: 2px 2px #6e6e6e;
+}
+section.title h1 {
+    font-size: 5rem;
+    color: #c5a059;
+    text-shadow: 2px 2px #b22d1d;
+}
+section.title h2 {
+    font-size: 4rem;
+}
+section.title h3 {
+    font-size: 2rem;
+}       
+
+.cloud1 {
+    position: absolute;
+    left: -3%;
+    top: 3%;
+    width: 55%;
+}
+
+.cloud2 {
+    position: absolute;
+    right: -1%;
+    top: 35%;
+    width: 55%;
+}
+
+.crane {
+    position: absolute;
+    z-index: 10;
+    left: 2%;
+    top: 45%;
+    width: 60%;
+}
+
+/* 概要説明
+---------------------------------*/
+
+section.explanation {
+    position: relative;
+    z-index: 1;
+    margin-top: 60%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    width: 100vw;
+    background: linear-gradient(#0d0d0d, #f8f4f6,#0d0d0d,#0d0d0d);
+}                  
+/*
+section.explanation div{
+    position: relative;
+    z-index:20;
+    top: 10%;
+}*/
+section.explanation p {
+    color: #0d0d0d;
+    background-color: #f8f4f6;
+    width: fit-content;
+    margin: 8% auto;  
+    padding: 3%;
+    font-size: 2rem;
+    border-radius: 1%;
+}
+
+.background {
+    display: block;
+    width: 100%;   /* 横幅を親要素に合わせる */
+    height: auto;  /* 高さは自動（比率を維持） */
+}
+
+section.explanation div {
+    position: absolute; /* 文字を画像の上に浮かせる */
+    top: 50%;           /* 上から50%の位置 */
+    left: 50%;          /* 左から50%の位置 */
+    transform: translate(-50%, -50%); /* 真ん中に持ってくる */
+    width: 100%;        /* 文字の横幅制限 */
+    z-index: 20;
+}
+/* 画像を背後に固定 
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    object-fit: contain; 
+    z-index: 10; 
+    pointer-events: none; 
+}
+/* コンテンツ
+---------------------------------*/
+.contents{
+    margin-top: 30%;
+}
+
+.img1, 
+.left, 
+.contents h2, 
+.contents h3, 
+p.sentence1,
+.button_vm{
+    position: relative;
+    z-index: 20;
+}
+
+/*統計１*/
+.content1{
+    position: relative;
+    margin-bottom: 50%;
+}
+
+.img1 {
+    width: 65%;
+    /*display: block;
+    margin: 0 auto;*/
+}
+
+.left{
+    left: -32%;
+}
+
+.contents h2{
+    font-size: 2.5rem;
+    color: #0d0d0d;
+    background-color: #f8f4f6;
+    width: fit-content;
+    margin: 8% auto;  
+    padding: 3%;
+}
+
+.contents h3{
+    font-size: 2rem;
+}
+
+p.sentence1 {
+    width: 80%;
+    font-size: 1.5rem;
+    margin: 5% auto;
+    line-height: 2rem;
+}
+
+.button_vm {
+    padding: 2%;
+    font-size: 1.5rem;
+    color: #0d0d0d;
+    background-color: #f8f4f6;
+    border: none;
+    border-radius: 5%;
+    right: -25%;
+}
+
+:hover.button_vm {
+    background-color: #c5a059;
+    color: #f8f4f6;
+    cursor: pointer;
+}
+
+/*装飾*/
+
+.circle {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: -8%;
+    width: 75%;
+}
+
+.cloud3{
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 100%;
+    width: 50%;
+}
+
+.crane2{
+    position: absolute;
+    z-index: 10;
+    left: 43%;
+    top: 100%;
+    width: 70%;
+}
