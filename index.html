@@ -58,7 +58,7 @@
                 <p class = "monologue">
                     観光客数 5606 万人<br>
                     世界有数の観光都市となった<br>
-                    <b class = "namecall_kyoto">京都</b><br>
+                    <b class = "namecall">京都</b><br>
                     しかし、市民や観光客からは<br>
                     <b>「乗れないバス」</b>への不満が聞こえる。<br>
                     あまりの混雑で、観光地へ向かう市バスには人ひとりたりとも入る隙間がないこともしばしば。<br>
@@ -74,11 +74,18 @@
                 <img src="assets/img/丸.png" alt="丸" class="circle">
                 <img src="assets/img/雲２.png" alt="雲" class="cloud3">
                 <img src="assets/img/鶴.png" alt="鶴" class="crane2">
-                <h3 class="left">統計１</h3>
-                <h2>○○エリアの混雑</h2>
-                <!--img src="assets/img/IMG_test.jpg" alt="統計１" class="img1"-->
-                 <div id = "num_tourists_fig_out" class = ""></div>
-                <p class="sentence1">サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</p>
+                <h3 class="left">1. 乗れないバス</h3>
+                <h2>1.1. 乗れないバス</h2>
+                <img src="assets/img/bus_sanjyusangendo_206.jpg" alt="統計１" class="img1">
+                <!--div id = "num_tourists_fig_out" class = ""></div-->
+                <p class="sentence1">
+                    <b>「えっ、これ乗るの？」</b><br>
+                    博物館三十三間堂から、祇園へ。<br>
+                    やってきた市バス206号系統は、もはや1人も乗せる余裕はない。<br>
+                    京都市バス 206号系統。京都駅から、清水寺、祇園といった東山エリアの観光地を進み、北大路バスターミナル、金閣寺、そして京都駅へ。京都の主要エリアをぐるっと一周する大動脈だ。 <br>
+                    10分以上待ったバスがこの調子。次も、乗れるかわからない。 <br>
+                    京都では平日休日問わず、このような光景が繰り返されている。 <br>
+                </p>
                 <a href="https://www.google.com/">
                     <button class="button_vm">→VIEWMORE</button>
                 </a>
@@ -236,12 +243,12 @@
         </section>
 
     </body>
-    <script>
+    <!--script>
         fetch("./assets/json/kyoto_tourism_graph.json")
         .then(response => response.json())
         .then(data => {
             Plotly.newPlot("num_tourists_fig_out", data.data, data.layout);
         });
-    </script>
+    </script-->
 </html>
 
