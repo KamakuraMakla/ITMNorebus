@@ -1,9 +1,9 @@
 .button{
     position: fixed;
     z-index: 9999;
-    bottom: -2%;
-    left: 1%;
-    width: 40%; 
+    bottom: 10.2rem;
+    left: .5rem;
+    width: 13rem; 
     transform: rotate(0deg);
     transform-origin: center;
     transition: 0.4s;
@@ -11,13 +11,13 @@
 
 .button.active {
     transform: rotate(45deg);
-    left: 1.5%;
+    left: .5rem;
 }
 
 .hamburger {
   position: fixed;
-  bottom: 10.3%;
-  left: 14.5%;
+  bottom: 19rem;
+  left: 2rem;
   width: 4rem;
   height: 2.5rem;
   cursor: pointer;
@@ -27,8 +27,8 @@
 .hamburger span {
 display: block;
 position: absolute;
-left: 0;
-width: 100%;
+left: 2.7rem;
+width: 4.5rem;
 height: 3px;
 background-color: #c5a059;
 transition: 0.4s;
@@ -66,13 +66,15 @@ transform: translateY(-50%) translateX(15%) rotate(-45deg);
 }
 
 
-
+.menu_background {
+    width: 102vw;
+}
 .globalnav {
     position: fixed;
     z-index: 9998;
-    bottom: -9.5%;
-    width: 100vw;
-    left: -105%;
+    bottom: 11.5rem;
+    width: 100%;
+    left: -100%;
     opacity: 0;
 }
 
@@ -84,7 +86,7 @@ transform: translateY(-50%) translateX(15%) rotate(-45deg);
 
 menu {
     position: fixed;
-    bottom: 18%;
+    bottom: 28rem;
     font-size: 2rem;
     z-index: 9999;
 }
