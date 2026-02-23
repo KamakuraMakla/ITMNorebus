@@ -144,7 +144,7 @@ section.explanation div {
 /* コンテンツ
 ---------------------------------*/
 .contents{
-    margin-top: 30%;
+    margin-top: 7rem;
 }
 
 .img1, 
@@ -160,7 +160,7 @@ p.sentence1,
 /*統計１*/
 .content1{
     position: relative;
-    margin-bottom: 50%;
+    margin-bottom: 45rem;
 }
 
 .img1 {
@@ -178,8 +178,9 @@ p.sentence1,
     color: #0d0d0d;
     background-color: #f8f4f6;
     width: fit-content;
-    margin: 8% auto;  
-    padding: 3%;
+    margin: 2.3rem auto;  
+    padding: 2rem;
+    white-space: nowrap;
 }
 
 .contents h3{
@@ -189,17 +190,17 @@ p.sentence1,
 p.sentence1 {
     width: 80%;
     font-size: 1.5rem;
-    margin: 5% auto;
-    line-height: 2rem;
+    margin: 2rem auto;
+    line-height: 1.5rem;
 }
 
 .button_vm {
-    padding: 2%;
+    padding: 0.5rem;
     font-size: 1.5rem;
     color: #0d0d0d;
     background-color: #f8f4f6;
     border: none;
-    border-radius: 5%;
+    border-radius: 0.3rem;
     right: -25%;
 }
 
