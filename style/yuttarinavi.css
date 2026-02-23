@@ -150,7 +150,7 @@ body {
     height: 8px;
     border-right: 2px solid #bda85e;
     border-bottom: 2px solid #bda85e;
-    pointer-events: none; /* クリックを邪魔しないように */
+    pointer-events: none; /* クリックを邪魔しないよう*/
 }
 
 /* ボタン類*/
@@ -200,6 +200,10 @@ body {
     transform: translateY(-2px);
 }
 
+
+
+
+
 /* =======================================
    検索結果画面用 追加スタイル
 ======================================= */
@@ -241,7 +245,6 @@ body {
     flex-grow: 1;
     background-color: #f8f8f8;
     height: 100%;
-    /* 入力エリアと見分けるため、少しだけ枠線を薄く設定 */
     border: 1px solid rgba(189, 168, 94, 0.5); 
     box-sizing: border-box;
 }
@@ -261,13 +264,13 @@ body {
 
 .highlight-time {
     display: flex;
-    align-items: baseline; /* 文字の下端を揃える */
+    align-items: baseline; 
     margin-top: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .circle-placeholder {
-    font-size: 3rem; /* 〇〇を大きく */
+    font-size: 3rem; 
     font-weight: normal;
     line-height: 1;
     margin-right: 15px;
@@ -283,8 +286,8 @@ body {
 .btn-research {
     background-color: #922b20;
     color: #ffffff;
-    border: 1px solid #bda85e; /* 金色の枠線 */
-    border-radius: 30px; /* 角丸（ピル型） */
+    border: 1px solid #bda85e; 
+    border-radius: 30px; 
     padding: 12px 20px;
     font-size: 1.1rem;
     font-family: inherit;
@@ -298,4 +301,105 @@ body {
 .btn-research:hover {
     background-color: #a63326;
     transform: translateY(-2px);
+}
+
+
+
+/* =======================================
+   「乗れるバス、何本後？」画面用 追加スタイル
+======================================= */
+/* タイトルの文字サイズと行間調整 */
+.bus-wait-header h1 {
+    font-size: 2.2rem;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+/* フォーム項目の間隔を広めにとる */
+.bus-wait-form .form-group {
+    margin-bottom: 25px;
+}
+
+/* 検索ボタンの上の余白を広めにとる */
+.bus-wait-form .submit-wrapper {
+    margin-top: 40px;
+}
+
+/* 「乗車人数」など2行になるラベルの調整 */
+.form-group label.label-multiline {
+    flex-direction: column;
+    font-size: 0.9rem; 
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+
+/* =======================================
+   「乗れるバス、何本後？」検索結果画面用 追加スタイル
+======================================= */
+/* メインメッセージ */
+.bus-result-message {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.bus-result-message p {
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* 〇本後です の部分 */
+.highlight-buses {
+    display: flex;
+    align-items: baseline;
+    margin-top: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.highlight-buses .circle-placeholder {
+    font-size: 3.5rem; /* 〇を大きく強調 */
+    line-height: 1;
+    font-weight: normal;
+}
+
+.highlight-buses .text-suffix {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+/* 所要時間 */
+.estimated-time {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* あなたのルート（区切り線の微調整） */
+.route-divider {
+    margin-bottom: 20px;
+    font-size: 0.65rem;
+}
+
+.route-divider::before,
+.route-divider::after {
+    opacity: 0.7; /* 線を少し控えめにして文字を目立たせる */
+}
+
+/* 読み取り専用ボックスの中のテキスト配置 */
+.form-group.read-only .input-display {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    color: #333;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* 項目間の余白をフォーム画面に合わせる */
+.bus-route-display .form-group {
+    margin-bottom: 20px;
 }
