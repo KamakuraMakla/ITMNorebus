@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head> <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ゆったりナビ</title>
+        <link rel="stylesheet" href="style/yuttarinavi.css">
+    </head>
+    <body>
+        <div class="navi-wrapper">
+            <div class="navi-container">
+                <header class="navi-header">
+                    <h1>京都ゆったりナビ</h1>
+                    <p class="subtitle">そうだ、<br>快適に行こう。</p>
+                </header>
+
+                <form class="navi-form" action="#" method="get">
+                    
+                    <div class="section-divider"><span>STEP1</span></div>
+
+                    <div class="form-group">
+                        <label for="departure">出発</label>
+                        <div class="select-wrapper">
+                            <select id="departure" name="departure">
+                                <option value=""></option>
+                                <option value="kyoto">京都駅</option>
+                                <option value="gion">祇園</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="via-wrapper">
+                        <button type="button" class="btn-via">＋経由</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="arrival">到着</label>
+                        <div class="select-wrapper">
+                            <select id="arrival" name="arrival">
+                                <option value=""></option>
+                                <option value="kiyomizu">清水寺</option>
+                                <option value="kinkakuji">金閣寺</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"><span>STEP2</span></div>
+
+                    <div class="form-group">
+                        <label for="datetime">日時</label>
+                        <div class="select-wrapper">
+                            <select id="datetime" name="datetime">
+                                <option value=""></option>
+                                <option value="now">現在時刻</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weather">天気</label>
+                        <div class="select-wrapper">
+                            <select id="weather" name="weather">
+                                <option value=""></option>
+                                <option value="sunny">晴れ</option>
+                                <option value="rain">雨</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="submit-wrapper">
+                        <button type="submit" class="btn-submit">検索</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
