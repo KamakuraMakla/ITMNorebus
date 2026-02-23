@@ -1,0 +1,201 @@
+/*body {
+    background-image: url(../assets/img/ynavi背景.png);
+}*/
+
+@charset "UTF-8";
+
+/* =======================================
+   基本設定
+======================================= */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Yu Mincho", "游明朝", "MS Mincho", serif;
+    background-image: url(../assets/img/ynavi背景.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #ffffff;
+    /* 中央配置*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 画面全体の幅調整 */
+.navi-wrapper {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 金枠コンテナ*/
+.navi-container {
+    border: 1px solid #bda85e; 
+    padding: 50px 30px;
+    background-color: rgba(0, 0, 0, 0.4); 
+    box-sizing: border-box;
+}
+
+/* 見出し・テキスト*/
+.navi-header {
+    margin-bottom: 40px;
+}
+
+.navi-header h1 {
+    font-size: 2rem;
+    margin: 0 0 15px 0;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.navi-header .subtitle {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 0;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/*フォームの区切り線（STEP1/STEP2）*/
+.navi-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-divider {
+    display: flex;
+    align-items: center;
+    color: #bda85e; 
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 25px 0 10px 0;
+}
+
+/* 左側の短い線 */
+.section-divider::before {
+    content: "";
+    width: 30px;
+    border-top: 1px solid #bda85e;
+    margin-right: 10px;
+}
+
+/* 右側の長い線 */
+.section-divider::after {
+    content: "";
+    flex-grow: 1; 
+    border-top: 1px solid #bda85e;
+    margin-left: 10px;
+}
+
+/* 入力項目（出発・到着など）*/
+.form-group {
+    display: flex;
+    height: 45px;
+    margin-bottom: 5px;
+}
+
+/* 左側のえんじ色ラベル */
+.form-group label {
+    background-color: #922b20; 
+    color: #ffffff;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    flex-shrink: 0;
+}
+
+/* 右側のプルダウン部分 */
+.select-wrapper {
+    flex-grow: 1;
+    position: relative;
+}
+
+/* プルダウン本体 */
+.select-wrapper select {
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 0 30px 0 15px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #333;
+    /* デフォルトの矢印を消す */
+    appearance: none; 
+    -webkit-appearance: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.select-wrapper select:focus {
+    outline: 2px solid #bda85e;
+}
+
+/* 金色のくの字 */
+.select-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-60%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #bda85e;
+    border-bottom: 2px solid #bda85e;
+    pointer-events: none; /* クリックを邪魔しないように */
+}
+
+/* ボタン類*/
+
+/* ＋経由 ボタン */
+.via-wrapper {
+    margin-bottom: 15px;
+    padding-left: 15px; 
+}
+
+.btn-via {
+    background-color: #5c2018; 
+    color: #ffffff;
+    border: none;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+/* 検索 ボタン */
+.submit-wrapper {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-submit {
+    background-color: #922b20; 
+    color: #ffffff;
+    border: none;
+    border-radius: 30px; 
+    padding: 12px 40px;
+    font-size: 1.5rem;
+    font-family: inherit;
+    letter-spacing: 6px;
+    text-indent: 6px; /* letter-spacingのズレを補正 */
+    cursor: pointer;
+    width: 85%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #a63326;
+    transform: translateY(-2px);
+}
