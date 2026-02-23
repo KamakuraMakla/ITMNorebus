@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="style/index.css">
         <link rel="stylesheet" href="style/menu.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-3.3.1.min.js"></script>
         <script src="src/norebus.js"></script>
     </head>
 
@@ -72,7 +73,8 @@
                 <img src="assets/img/鶴.png" alt="鶴" class="crane2">
                 <h3 class="left">統計１</h3>
                 <h2>○○エリアの混雑</h2>
-                <img src="assets/img/IMG_test.jpg" alt="統計１" class="img1">
+                <!--img src="assets/img/IMG_test.jpg" alt="統計１" class="img1"-->
+                 <div id = "num_tourists_fig_out" class = ""></div>
                 <p class="sentence1">サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</p>
                 <a href="https://www.google.com/">
                     <button class="button_vm">→VIEWMORE</button>
@@ -231,5 +233,12 @@
         </section>
 
     </body>
+    <script>
+        fetch("./assets/json/kyoto_tourism_graph.json")
+        .then(response => response.json())
+        .then(data => {
+            Plotly.newPlot("num_tourists_fig_out", data.data, data.layout);
+        });
+    </script>
 </html>
 
