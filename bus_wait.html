@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>乗れるバス、何本後？</title>
+        <link rel="stylesheet" href="style/yuttarinavi.css">
+    </head>
+    <body>
+        <div class="navi-wrapper">
+            <div class="navi-container">
+                
+                <header class="navi-header bus-wait-header">
+                    <h1>乗れるバス、<br>何本後？</h1>
+                </header>
+
+                <form class="navi-form bus-wait-form" action="#" method="get">
+                    
+                    <div class="form-group">
+                        <label for="departure">出発</label>
+                        <div class="select-wrapper">
+                            <select id="departure" name="departure">
+                                <option value=""></option>
+                                <option value="kyoto">京都駅</option>
+                                <option value="kiyomizumichi">清水道</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="route">系統</label>
+                        <div class="select-wrapper">
+                            <select id="route" name="route">
+                                <option value=""></option>
+                                <option value="206">206号系統</option>
+                                <option value="5">5号系統</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="queue">並び</label>
+                        <div class="select-wrapper">
+                            <select id="queue" name="queue">
+                                <option value="" selected>前に--人</option>
+                                <option value="10">前に10人</option>
+                                <option value="20">前に20人</option>
+                                <option value="30">前に30人</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passengers" class="label-multiline"><span>乗車<br>人数</span></label>
+                        <div class="select-wrapper">
+                            <select id="passengers" name="passengers">
+                                <option value="" selected>一度に--人</option>
+                                <option value="1">一度に1人</option>
+                                <option value="2">一度に2人</option>
+                                <option value="3">一度に3人</option>
+                                <option value="4">一度に4人</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="submit-wrapper">
+                        <button type="submit" class="btn-submit">検索</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
