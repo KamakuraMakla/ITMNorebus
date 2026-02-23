@@ -128,13 +128,24 @@ section.explanation p {
     height: auto;  /* 高さは自動（比率を維持） */
 }
 
-section.explanation div {
-    position: absolute; /* 文字を画像の上に浮かせる */
-    top: 70rem;           
+/* 「はじめに」とINDEXをセットにして画像の上に配置する */
+.explanation-content {
+    position: absolute; 
+    top: 40rem; /* ★元の35remだと下に寄りすぎてINDEXが画像からはみ出る可能性があるため数値を小さくしました。お好みの位置に調整してください */
     left: 0;          
-    transform: translate(-.5rem, -.5rem); /* 真ん中に持ってくる */
-    width: 100vw;        /* 文字の横幅制限 */
+    width: 100vw;        
     z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 左右中央揃え */
+}
+
+/* はじめにの文章とINDEXの間の余白を調整 */
+.index-wrapper {
+    margin-top: 2rem; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 /* 画像を背後に固定 
 .background {
@@ -145,7 +156,75 @@ section.explanation div {
     object-fit: contain; 
     z-index: 10; 
     pointer-events: none; 
+}*/
+
+/* --- INDEXセクションのスタイル --- */
+.index-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem; /* 「はじめに」からの余白 */
+    margin-bottom: 60px; /* 次のセクションへの余白 */
+    padding: 0 20px;
 }
+
+.index-container {
+    border: 3px solid #bda85e; /* 金色の枠線 */
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box;
+    font-family: "Yu Mincho", "游明朝", "MS Mincho", serif; /* 明朝体 */
+    color: #ffffff;
+    /* 背景画像に文字が紛れないよう、暗めの背景色と文字の影を追加 */
+    background-color: rgba(0, 0, 0, 0.3); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.index-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 0 0 40px 0;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.index-title span {
+    border-bottom: 3px solid #ffffff; /* 下線 */
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.index-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.index-list > li {
+    margin-bottom: 30px;
+}
+
+.index-main {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.index-sub {
+    list-style: none;
+    padding: 0 0 0 20px; /* サブ項目の字下げ */
+    margin: 0;
+}
+
+.index-sub li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+}
+
 /* コンテンツ
 ---------------------------------*/
 .contents{
