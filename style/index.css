@@ -117,7 +117,7 @@ section.explanation p {
     border-radius: .5rem;
 }
 
-section.explanation p .namecall_kyoto
+.namecall
 {
     font-size: 3rem;
     color: #c5a059;
@@ -176,7 +176,8 @@ p.sentence1,
 }
 
 .left{
-    left: -32%;
+    /*left: -32%;*/
+    text-align: left;
 }
 
 .contents h2{
@@ -195,6 +196,7 @@ p.sentence1,
 
 p.sentence1 {
     width: 80%;
+    text-align: left;
     font-size: 1.5rem;
     margin: 2rem auto;
     line-height: 1.5rem;
