@@ -199,3 +199,103 @@ body {
     background-color: #a63326;
     transform: translateY(-2px);
 }
+
+/* =======================================
+   検索結果画面用 追加スタイル
+======================================= */
+/* 見出しの余白調整 */
+.navi-header.result-header {
+    margin-bottom: 20px;
+}
+
+/* 結果（赤い帯） */
+.result-title-box {
+    background-color: #922b20; /* えんじ色 */
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+
+.result-title-box h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.6rem;
+    letter-spacing: 8px;
+    font-weight: normal;
+    text-indent: 8px; /* letter-spacingのズレ補正 */
+}
+
+/* 検索条件テキスト（〇月〇日...） */
+.result-conditions {
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+/* 読み取り専用の入力ボックス風装飾 */
+.route-display {
+    margin-bottom: 40px;
+}
+
+.form-group.read-only .input-display {
+    flex-grow: 1;
+    background-color: #f8f8f8;
+    height: 100%;
+    /* 入力エリアと見分けるため、少しだけ枠線を薄く設定 */
+    border: 1px solid rgba(189, 168, 94, 0.5); 
+    box-sizing: border-box;
+}
+
+/* 快適になる時間（メッセージ部分） */
+.result-message {
+    margin-bottom: 50px;
+}
+
+.result-message p {
+    margin: 0 0 5px 0;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.highlight-time {
+    display: flex;
+    align-items: baseline; /* 文字の下端を揃える */
+    margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.circle-placeholder {
+    font-size: 3rem; /* 〇〇を大きく */
+    font-weight: normal;
+    line-height: 1;
+    margin-right: 15px;
+    letter-spacing: 0;
+}
+
+.small-text {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+/* 再検索ボタン */
+.btn-research {
+    background-color: #922b20;
+    color: #ffffff;
+    border: 1px solid #bda85e; /* 金色の枠線 */
+    border-radius: 30px; /* 角丸（ピル型） */
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    letter-spacing: 2px;
+    cursor: pointer;
+    width: 90%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+}
+
+.btn-research:hover {
+    background-color: #a63326;
+    transform: translateY(-2px);
+}
