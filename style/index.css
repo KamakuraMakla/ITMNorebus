@@ -163,6 +163,180 @@ p.sentence1,
     z-index: 20;
 }
 
+/* 混雑を知る・避ける
+---------------------------------*/
+:root{
+  --gold:#9C7B2F;
+  --red:#9E2A1F;
+  --white:#ffffff;
+}
+
+/* 背景 */
+
+.congestion-section{
+  background:url("../img/背景.webp") center/cover no-repeat;
+  padding:2rem 1.2rem;
+}
+
+.overlay{
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(4px);
+  padding:0.2rem 1rem 1rem;
+}
+
+/* タイトル */
+
+.main-title{
+  text-align:center;
+  font-size:2.2rem;
+  line-height:1.6;
+  color:#000;
+  margin-bottom:2rem;
+  font-family:"Hiragino Mincho ProN",serif;
+  letter-spacing:.15em;
+}
+
+.main-title .small{
+  font-size: 0.7em;
+}
+
+/* ================= 帯リンク全体 ================= */
+.banner{
+  display:block;
+  width:100%;            /* コンテナ幅に沿う */
+  margin-bottom:1.2rem;
+  text-decoration:none;
+}
+
+/* ================= 帯本体 ================= */
+.card{
+  position:relative;
+  display:flex;
+  align-items:center;
+  height:5.5rem;
+  overflow:hidden;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+/* ================= 中身だけ中央幅 ================= */
+.card-inner{
+  width:100%;              /* コンテナ幅いっぱい */
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 1rem;          /* 左右に余白 */
+}
+
+/* ================= テキスト側 ================= */
+.content{
+  color:#fff;
+}
+
+/* ================= 矢印側 ================= */
+.arrow-box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ================= テーマ ================= */
+.red .card{
+  background:var(--red);
+}
+
+.gold .card{
+  background:var(--gold);
+}
+
+/* ================= 内側の薄い枠（カードごとに色変え可） */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:.4rem;
+  border:1px solid var(--frame-color, rgba(255,255,255,0.35));
+}
+
+.red{
+  --frame-color:#9C7B2F;
+}
+
+.gold{
+  --frame-color:#9E2A1F;
+}
+
+/* テキスト */
+
+.text{
+  position:relative;
+  z-index:2;
+  padding-left:1.4rem;
+  color:var(--white);
+}
+
+.text.dark{
+  color:#000;
+}
+
+.title{
+  font-size:1.2rem;
+  margin-bottom:.3rem;
+}
+
+.sub{
+  font-size:.65rem;
+  opacity:.8;
+}
+
+/* 透かし漢字 */
+
+.kanji{
+  position:absolute;
+  right: 0.5rem;
+  font-size:3.8rem;
+  font-family:"Hiragino Mincho ProN",serif;
+  color:rgba(255,255,255,0.18);
+}
+
+.gold .kanji{
+  color:rgba(158,42,31,0.35);
+}
+
+/* 矢印エリア */
+
+.arrow{
+  position:absolute;
+  right:0;
+  top:0;
+  width:3.2rem;
+  height:100%;
+  border-left:1px solid rgba(255,255,255,0.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.arrow::after{
+  content:"";
+  width:.55rem;
+  height:.55rem;
+  border-top:2px solid var(--white);
+  border-right:2px solid var(--white);
+  transform:rotate(45deg);
+}
+
+/* 金カードの矢印色 */
+
+.gold .arrow::after{
+  border-color: #9E2A1F;
+}
+
+/* hover */
+
+.banner:hover .card{
+  transform:translateY(-4px);
+  transition:.3s;
+}
 /*統計１*/
 .content1{
     position: relative;
