@@ -106,13 +106,21 @@ section.explanation div{
     top: 10%;
 }*/
 section.explanation p {
-    color: #0d0d0d;
-    background-color: #f8f4f6;
+    text-align: left;
+    /*color: #0d0d0d;
+    background-color: #f8f4f6;*/
     width: fit-content;
     margin: 2rem auto;  
     padding: 1rem;
-    font-size: 2rem;
+    /*font-size: 2rem;*/
+    font-size: 1.5rem;
     border-radius: .5rem;
+}
+
+section.explanation p .namecall_kyoto
+{
+    font-size: 3rem;
+    color: #c5a059;
 }
 
 .background {
