@@ -184,129 +184,204 @@ document.getElementById('calcBtn').addEventListener('click', () => {
 */
 // もうGTFSをブラウザでパースしないので、Papa / Luxon は不要です。
 
-async function apiGet(params) {
-  const qs = new URLSearchParams(params);
-  const res = await fetch(`https://cloverfes.com/opendata_test/norebus.php?${qs.toString()}`, { cache: "no-store" });
-  const json = await res.json().catch(() => null);
-  console.log(json);
-  if (!json || !json.ok) {
-    const msg = json?.error ?? `API error (${res.status})`;
-    throw new Error(msg);
-  }
-  return json.data;
+// 今回対象とした15駅のリスト
+// 今回対象とした15駅のリスト
+const STATIONS = [
+    "京都駅前", "五条坂", "清水道", "四条河原町", "四条烏丸", "四条大宮",
+    "西ノ京円町", "銀閣寺道", "金閣寺道", "百万遍", "北大路バスターミナル",
+    "国際会館駅", "烏丸今出川", "出町柳駅", "北野天満宮"
+];
+
+let currentStationData = []; // 読み込んだJSONデータを一時保存する変数
+
+document.addEventListener("DOMContentLoaded", () => {
+    // 画面に「検索フォーム」があるか「戻るボタン」があるかでページ判定
+    const isSearchPage = document.getElementById("searchForm") !== null;
+
+    if (isSearchPage) {
+        initSearchPage();
+    } else {
+        initResultPage();
+    }
+});
+
+// ==========================================
+// 1. 検索画面 (bus_wait.html) 用の処理
+// ==========================================
+function initSearchPage() {
+    const stopSel = document.getElementById("departure");
+    const routeSel = document.getElementById("route");
+    const destSel = document.getElementById("destination");
+    const statusArea = document.getElementById("status-area");
+    const searchForm = document.getElementById("searchForm");
+
+    // 出発停留所の選択肢を作成
+    STATIONS.forEach(st => stopSel.add(new Option(st, st)));
+
+    // 【1段階目】停留所が選ばれたら、JSONを読み込んで「系統リスト」を作る
+    stopSel.addEventListener("change", async function() {
+        const station = this.value;
+        
+        // 系統と行き先をリセット
+        routeSel.innerHTML = '<option value="">-- 系統を選択してください --</option>';
+        routeSel.disabled = true;
+        destSel.innerHTML = '<option value="">-- 先に系統を選んでください --</option>';
+        destSel.disabled = true;
+        
+        if (!station) return;
+
+        statusArea.style.display = "block";
+        statusArea.innerText = "路線データを読み込み中...";
+
+        try {
+            // JSONファイルを読み込んで変数に保存
+            const res = await fetch(`station_lists/${station}.json`);
+            if (!res.ok) throw new Error("JSONファイルの読み込みに失敗しました");
+            currentStationData = await res.json();
+
+            // 「系統」だけを重複なしで抽出してソート
+            const uniqueRoutes = [...new Set(currentStationData.map(bus => bus['系統']))].sort();
+
+            // 系統セレクトボックスに項目を追加
+            uniqueRoutes.forEach(route => {
+                routeSel.add(new Option(route, route));
+            });
+
+            routeSel.disabled = false;
+            statusArea.style.display = "none";
+        } catch (e) {
+            console.error(e);
+            statusArea.className = "error";
+            statusArea.innerText = "❌ データの読み込みに失敗しました";
+        }
+    });
+
+    // 【2段階目】系統が選ばれたら、「行き先リスト」を作る
+    routeSel.addEventListener("change", function() {
+        const selectedRoute = this.value;
+        
+        // 行き先をリセット
+        destSel.innerHTML = '<option value="">-- 行き先を選択してください --</option>';
+        destSel.disabled = true;
+
+        if (!selectedRoute) return;
+
+        // 選んだ系統に該当するデータだけを絞り込み、「行き先」を重複なしで抽出してソート
+        const targetBuses = currentStationData.filter(bus => bus['系統'] === selectedRoute);
+        const uniqueDests = [...new Set(targetBuses.map(bus => bus['行き先']))].sort();
+
+        // 行き先セレクトボックスに項目を追加
+        uniqueDests.forEach(dest => {
+            destSel.add(new Option(dest, dest));
+        });
+
+        destSel.disabled = false;
+    });
+
+    // 検索ボタンを押した時の処理
+    searchForm.addEventListener("submit", (e) => {
+        e.preventDefault(); 
+        
+        const station = stopSel.value;
+        const route = routeSel.value;
+        const dest = destSel.value;
+        const queue = document.getElementById("queue").value;
+        const capacity = document.getElementById("capacity").value;
+
+        if (!station || !route || !dest || !queue || !capacity) return;
+
+        // URLパラメータを作成
+        const params = new URLSearchParams({
+            station, route, dest, queue, capacity
+        });
+        
+        // 結果ページへ遷移
+        window.location.href = `ans_bus_wait.html?${params.toString()}`;
+    });
 }
 
-window.addEventListener("DOMContentLoaded", async () => {
-  const statusArea = document.getElementById("status-area");
-  const stopSel = document.getElementById("departure");
-  const routeSel = document.getElementById("route");
+// ==========================================
+// 2. 結果画面 (ans_bus_wait.html) 用の処理
+// ==========================================
+async function initResultPage() {
+    // URLからパラメータを取得
+    const params = new URLSearchParams(window.location.search);
+    const station = params.get("station");
+    const route = params.get("route");
+    const dest = params.get("dest");
+    const queue = parseInt(params.get("queue"), 10);
+    const capacity = parseInt(params.get("capacity"), 10);
 
-  // 初期状態
-  routeSel.innerHTML = '<option value="">-- 系統を選択してください --</option>';
-  routeSel.disabled = true;
+    // 戻るボタンの処理
+    document.getElementById("backBtn").addEventListener("click", () => window.history.back());
 
-  try {
-    // stops取得
-    const data = await apiGet({ action: "stops" });
+    const resultArea = document.getElementById("resultArea");
+    const timeArea = document.getElementById("timeArea");
 
-    // 既存optionをクリア（もしHTML側に初期optionがあるなら）
-    // stopSel.innerHTML = '<option value="">-- 出発停留所を選択してください --</option>';
-
-    data.stops.forEach((name) => {
-      stopSel.add(new Option(name, name));
-    });
-
-    statusArea.style.display = "none";
-  } catch (e) {
-    statusArea.className = "error";
-    statusArea.innerText = "❌ データのロードに失敗しました。";
-    console.error(e);
-  }
-});
-
-// 停留所変更 → 系統リスト
-document.getElementById("departure").addEventListener("change", async function () {
-  const stopName = this.value;
-  const routeSel = document.getElementById("route");
-
-  routeSel.innerHTML = '<option value="">-- 系統を選択してください --</option>';
-  routeSel.disabled = true;
-
-  if (!stopName) return;
-
-  try {
-    const data = await apiGet({ action: "routes", stopName });
-
-    data.routes.forEach((r) => {
-      routeSel.add(new Option(r.label, r.route_id));
-    });
-
-    routeSel.disabled = false;
-  } catch (e) {
-    console.error(e);
-    // UIに出したいならここで表示
-  }
-});
-
-// 計算ボタン
-document.getElementById("calcBtn").addEventListener("click", async () => {
-  const stopName = document.getElementById("departure").value;
-  const routeId = document.getElementById("route").value;
-  const queue = parseInt(document.getElementById("queue").value, 10);
-  const capacity = parseInt(document.getElementById("capacity").value, 10);
-
-  const resDiv = document.getElementById("result");
-  const box = document.getElementById("result_box");
-
-  if (!stopName || !routeId) return;
-  if (!Number.isFinite(queue) || queue < 0) {
-    resDiv.innerText = "行列人数が不正です。";
-    box.style.display = "block";
-    return;
-  }
-  if (!Number.isFinite(capacity) || capacity <= 0) {
-    resDiv.innerText = "定員が不正です。";
-    box.style.display = "block";
-    return;
-  }
-
-  try {
-    const data = await apiGet({
-      action: "calc",
-      stopName,
-      routeId,
-      queue: String(queue),
-      capacity: String(capacity),
-    });
-
-    box.style.display = "block";
-
-    if (data.status === "finished") {
-      resDiv.innerHTML = data.message ?? "本日の運行は終了しました。";
-      return;
+    if (!station || !route || !dest) {
+        resultArea.innerHTML = "<p>❌ 情報が不足しています</p>";
+        timeArea.innerHTML = "";
+        return;
     }
 
-    if (data.status === "overflow") {
-      resDiv.innerHTML = data.message ?? "非常に長い行列です。";
-      return;
+    // 選択された条件を画面に反映
+    document.getElementById("disp-station").innerText = station;
+    document.getElementById("disp-route").innerText = route;
+    document.getElementById("disp-dest").innerText = dest;
+    document.getElementById("disp-queue").innerText = `前に${queue}人`;
+    document.getElementById("disp-capacity").innerText = `一度に${capacity}人`;
+
+    try {
+        // 対象の駅のJSONデータを取得
+        const res = await fetch(`station_lists/${station}.json`);
+        if (!res.ok) throw new Error("Data not found");
+        const allBuses = await res.json();
+
+        // 指定された「系統」と「行き先」に一致するバスだけを絞り込む
+        const targetBuses = allBuses.filter(b => b['系統'] === route && b['行き先'] === dest);
+
+        // 現在時刻の取得
+        const now = luxon.DateTime.now().setZone('Asia/Tokyo');
+        const currentTimeStr = now.toFormat("HH:mm:ss");
+
+        // 今の時間以降に出発するバスだけを抽出
+        const upcoming = targetBuses.filter(b => b['出発時間'] >= currentTimeStr);
+
+        if (upcoming.length === 0) {
+            resultArea.innerHTML = "<p>本日のこの系統の<br>運行は終了しました</p>";
+            timeArea.innerHTML = "";
+            return;
+        }
+
+        // 乗れるバスのインデックスを計算
+        const targetIndex = Math.floor(queue / capacity);
+        
+        if (targetIndex >= upcoming.length) {
+            resultArea.innerHTML = `<p>行列が長すぎます。<br>本日の残り便では乗れない可能性があります。</p>`;
+            timeArea.innerHTML = "";
+            return;
+        }
+
+        const myBus = upcoming[targetIndex];
+        
+        // 待ち時間の計算
+        const [h, m, s] = myBus['出発時間'].split(":");
+        const busTime = now.set({hour: parseInt(h, 10), minute: parseInt(m, 10), second: parseInt(s, 10)});
+        const diffMin = Math.round(busTime.diff(now, 'minutes').minutes);
+
+        // 結果を画面に出力
+        resultArea.innerHTML = `
+            <p>あなたが<br>乗れるバスは、</p>
+            <div class="highlight-buses">
+                <span class="circle-placeholder">${targetIndex}</span>
+                <span class="text-suffix">本後です</span>
+            </div>
+        `;
+        timeArea.innerHTML = `到着予定: ${myBus['出発時間']} (約 <b>${diffMin} 分後</b>)`;
+
+    } catch (e) {
+        console.error(e);
+        resultArea.innerHTML = "<p>❌ 計算エラーが発生しました</p>";
+        timeArea.innerHTML = "";
     }
-
-    // status === "ok"
-    const idx = (data.targetBusIndex ?? 0) + 1;
-    const waitMin = data.waitMin ?? 0;
-    const time = data.targetTime ?? "--:--:--";
-    const yourPos = data.yourPosition ?? (queue + 1);
-
-    resDiv.innerHTML = `
-      <div class="bus-result-message">
-        あなたは <div class="highlight-buses"><span class="circle-placeholder">${idx}</span> 台目</div> のバスに乗れる見込みです。<br>
-        <div class="estimated-time">到着予定: ${time} (約 <b>${waitMin} 分後</b>)</div><br>
-        <small>※あなたの位置: ${yourPos}番目 / バス1台の空き: ${capacity}名</small>
-      </div>
-    `;
-  } catch (e) {
-    console.error(e);
-    box.style.display = "block";
-    resDiv.innerHTML = "❌ 計算に失敗しました。";
-  }
-});
+}

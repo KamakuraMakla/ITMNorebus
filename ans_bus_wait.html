@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>乗れるバス、何本後？ - 検索結果</title>
         <link rel="stylesheet" href="style/yuttarinavi.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js"></script>
+        <script src="./src/queue_est.js" defer></script>
     </head>
     <body>
         <div class="navi-wrapper">
@@ -14,17 +16,12 @@
                     <h2>結果</h2>
                 </div>
 
-                <div class="bus-result-message">
-                    <p>あなたが<br>乗れるバスは、</p>
-                    <div class="highlight-buses">
-                        <span class="circle-placeholder">〇</span>
-                        <span class="text-suffix">本後です</span>
-                    </div>
+                <div class="bus-result-message" id="resultArea">
+                    <p>計算中...</p>
                 </div>
 
-                <div class="estimated-time">
-                    推測される所要時間は〇分です
-                </div>
+                <div class="estimated-time" id="timeArea">
+                    </div>
 
                 <div class="section-divider route-divider">
                     <span>あなたのルート</span>
@@ -33,27 +30,32 @@
                 <div class="route-display bus-route-display">
                     <div class="form-group read-only">
                         <label>出発</label>
-                        <div class="input-display">京都駅</div>
+                        <div class="input-display" id="disp-station">--</div>
                     </div>
 
                     <div class="form-group read-only">
                         <label>系統</label>
-                        <div class="input-display">206号系統</div>
+                        <div class="input-display" id="disp-route">--</div>
+                    </div>
+
+                    <div class="form-group read-only">
+                        <label>行き先</label>
+                        <div class="input-display" id="disp-dest">--</div>
                     </div>
 
                     <div class="form-group read-only">
                         <label>並び</label>
-                        <div class="input-display">前に--人</div>
+                        <div class="input-display" id="disp-queue">--</div>
                     </div>
 
                     <div class="form-group read-only">
                         <label class="label-multiline"><span>乗車<br>人数</span></label>
-                        <div class="input-display">一度に--人</div>
+                        <div class="input-display" id="disp-capacity">--</div>
                     </div>
                 </div>
 
                 <div class="submit-wrapper">
-                    <button type="button" class="btn-research">条件を変更で再検索</button>
+                    <button type="button" class="btn-research" id="backBtn">条件を変更して再検索</button>
                 </div>
 
             </div>
