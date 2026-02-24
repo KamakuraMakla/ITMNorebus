@@ -22,12 +22,12 @@
                         <div class="select-wrapper">
                             <select id="departure" name="departure" class="location-select">
                                 <option value=""></option>
-                                <option value="京都駅前バス乗り場">京都駅前バス乗り場</option>
-                                <option value="北野天満宮前付近">北野天満宮前付近</option>
-                                <option value="哲学の道北端">哲学の道北端</option>
-                                <option value="清水坂">清水坂</option>
+                                <option value="京都駅">京都駅</option>
+                                <option value="北野天満宮">北野天満宮</option>
+                                <option value="哲学の道">哲学の道</option>
+                                <option value="清水寺">清水寺</option>
                                 <option value="錦市場">錦市場</option>
-                                <option value="金閣寺道付近">金閣寺道付近</option>
+                                <option value="金閣寺">金閣寺</option>
                             </select>
                         </div>
                     </div>
@@ -42,12 +42,12 @@
                         <div class="select-wrapper">
                             <select id="arrival" name="arrival" class="location-select">
                                 <option value=""></option>
-                                <option value="京都駅前バス乗り場">京都駅前バス乗り場</option>
-                                <option value="北野天満宮前付近">北野天満宮前付近</option>
-                                <option value="哲学の道北端">哲学の道北端</option>
-                                <option value="清水坂">清水坂</option>
+                                <option value="京都駅">京都駅</option>
+                                <option value="北野天満宮">北野天満宮</option>
+                                <option value="哲学の道">哲学の道</option>
+                                <option value="清水寺">清水寺</option>
                                 <option value="錦市場">錦市場</option>
-                                <option value="金閣寺道付近">金閣寺道付近</option>
+                                <option value="金閣寺">金閣寺</option>
                             </select>
                         </div>
                     </div>
@@ -93,21 +93,22 @@
             </div>
         </div>
 
-        <script src="js/logic.js"></script>
+        <script src="src/app.js"></script>
         <script>
             // 選択肢の重複防止や現在時刻取得の処理
             document.addEventListener('DOMContentLoaded', function() {
                 const addViaBtn = document.getElementById('add-via-btn');
                 const viaContainer = document.getElementById('via-container');
                 
+                // ここも新しい観光地名に修正
                 const optionsHTML = `
                     <option value=""></option>
-                    <option value="京都駅前バス乗り場">京都駅前バス乗り場</option>
-                    <option value="北野天満宮前付近">北野天満宮前付近</option>
-                    <option value="哲学の道北端">哲学の道北端</option>
-                    <option value="清水坂">清水坂</option>
+                    <option value="京都駅">京都駅</option>
+                    <option value="北野天満宮">北野天満宮</option>
+                    <option value="哲学の道">哲学の道</option>
+                    <option value="清水寺">清水寺</option>
                     <option value="錦市場">錦市場</option>
-                    <option value="金閣寺道付近">金閣寺道付近</option>
+                    <option value="金閣寺">金閣寺</option>
                 `;
 
                 addViaBtn.addEventListener('click', function() {
