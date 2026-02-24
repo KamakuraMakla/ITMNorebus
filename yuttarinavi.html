@@ -13,32 +13,41 @@
                     <p class="subtitle">そうだ、<br>快適に行こう。</p>
                 </header>
 
-                <form class="navi-form" action="#" method="get">
+                <form class="navi-form" id="navi-form" action="ans_yuttarinavi.html" method="get" onsubmit="return validateForm()">
                     
                     <div class="section-divider"><span>STEP1</span></div>
 
                     <div class="form-group">
                         <label for="departure">出発</label>
                         <div class="select-wrapper">
-                            <select id="departure" name="departure">
+                            <select id="departure" name="departure" class="location-select">
                                 <option value=""></option>
-                                <option value="kyoto">京都駅</option>
-                                <option value="gion">祇園</option>
+                                <option value="京都駅前バス乗り場">京都駅前バス乗り場</option>
+                                <option value="北野天満宮前付近">北野天満宮前付近</option>
+                                <option value="哲学の道北端">哲学の道北端</option>
+                                <option value="清水坂">清水坂</option>
+                                <option value="錦市場">錦市場</option>
+                                <option value="金閣寺道付近">金閣寺道付近</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="via-wrapper">
-                        <button type="button" class="btn-via">＋経由</button>
+                        <button type="button" class="btn-via" id="add-via-btn">＋経由</button>
+                        <div id="via-container"></div>
                     </div>
 
                     <div class="form-group">
                         <label for="arrival">到着</label>
                         <div class="select-wrapper">
-                            <select id="arrival" name="arrival">
+                            <select id="arrival" name="arrival" class="location-select">
                                 <option value=""></option>
-                                <option value="kiyomizu">清水寺</option>
-                                <option value="kinkakuji">金閣寺</option>
+                                <option value="京都駅前バス乗り場">京都駅前バス乗り場</option>
+                                <option value="北野天満宮前付近">北野天満宮前付近</option>
+                                <option value="哲学の道北端">哲学の道北端</option>
+                                <option value="清水坂">清水坂</option>
+                                <option value="錦市場">錦市場</option>
+                                <option value="金閣寺道付近">金閣寺道付近</option>
                             </select>
                         </div>
                     </div>
@@ -46,37 +55,153 @@
                     <div class="section-divider"><span>STEP2</span></div>
 
                     <div class="form-group">
-                        <label for="datetime">日時</label>
+                        <label for="datetime-mode">日時</label>
                         <div class="select-wrapper">
-                            <select id="datetime" name="datetime">
-                                <option value=""></option>
+                            <select id="datetime-mode" name="datetime_mode">
                                 <option value="now">現在時刻</option>
+                                <option value="custom">詳細入力</option>
                             </select>
                         </div>
+                    </div>
+                    
+                    <div id="custom-datetime-container" style="display: none; padding: 0 5%; margin-bottom: 15px;">
+                        <input type="datetime-local" id="custom-datetime" name="custom_datetime" style="width: 100%; padding: 10px; font-size: 16px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; background-color: #fff;">
                     </div>
 
                     <div class="form-group">
                         <label for="weather">天気</label>
                         <div class="select-wrapper">
                             <select id="weather" name="weather">
-                                <option value=""></option>
-                                <option value="sunny">晴れ</option>
-                                <option value="rain">雨</option>
+                                <option value="晴れ">晴れ</option>
+                                <option value="雨">雨</option>
+                                <option value="大雨">大雨</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="submit-wrapper">
-                        <button type="submit" class="btn-submit">検索</button>
+                        <button type="submit" class="btn-submit" id="search-btn">検索</button>
                     </div>
 
                 </form>
-                <div class="back-btn-wrapper">
-                <a href="index.html" class="btn-back">
-                    <span class="chevron-left"></span>
-                </a>
-            </div>
+
+                <div class="back-btn-wrapper" style="margin-top: 20px;">
+                    <a href="index.html" class="btn-back">
+                        <span class="chevron-left"></span>
+                    </a>
+                </div>
             </div>
         </div>
+
+        <script src="js/logic.js"></script>
+        <script>
+            // 選択肢の重複防止や現在時刻取得の処理
+            document.addEventListener('DOMContentLoaded', function() {
+                const addViaBtn = document.getElementById('add-via-btn');
+                const viaContainer = document.getElementById('via-container');
+                
+                const optionsHTML = `
+                    <option value=""></option>
+                    <option value="京都駅前バス乗り場">京都駅前バス乗り場</option>
+                    <option value="北野天満宮前付近">北野天満宮前付近</option>
+                    <option value="哲学の道北端">哲学の道北端</option>
+                    <option value="清水坂">清水坂</option>
+                    <option value="錦市場">錦市場</option>
+                    <option value="金閣寺道付近">金閣寺道付近</option>
+                `;
+
+                addViaBtn.addEventListener('click', function() {
+                    const div = document.createElement('div');
+                    div.className = 'form-group';
+                    div.style.marginTop = '10px';
+                    
+                    div.innerHTML = `
+                        <label>経由</label>
+                        <div class="select-wrapper">
+                            <select name="via[]" class="location-select">
+                                ${optionsHTML}
+                            </select>
+                        </div>
+                    `;
+                    
+                    viaContainer.appendChild(div);
+                    const newSelect = div.querySelector('select');
+                    newSelect.addEventListener('change', updateOptions);
+                    updateOptions();
+                });
+
+                function updateOptions() {
+                    const selects = document.querySelectorAll('.location-select');
+                    const selectedValues = Array.from(selects).map(s => s.value).filter(v => v !== ""); 
+                    selects.forEach(select => {
+                        const options = select.querySelectorAll('option');
+                        options.forEach(option => {
+                            if (option.value !== "") {
+                                if (option.value !== select.value && selectedValues.includes(option.value)) {
+                                    option.disabled = true;
+                                } else {
+                                    option.disabled = false;
+                                }
+                            }
+                        });
+                    });
+                }
+
+                const initialSelects = document.querySelectorAll('.location-select');
+                initialSelects.forEach(select => {
+                    select.addEventListener('change', updateOptions);
+                });
+
+                const datetimeMode = document.getElementById('datetime-mode');
+                const customDatetimeContainer = document.getElementById('custom-datetime-container');
+                const customDatetimeInput = document.getElementById('custom-datetime');
+
+                function setCurrentTimeToInput() {
+                    const now = new Date();
+                    const year = now.getFullYear();
+                    const month = String(now.getMonth() + 1).padStart(2, '0');
+                    const day = String(now.getDate()).padStart(2, '0');
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                    customDatetimeInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+                }
+
+                setCurrentTimeToInput();
+
+                datetimeMode.addEventListener('change', function() {
+                    if (this.value === 'custom') {
+                        customDatetimeContainer.style.display = 'block';
+                    } else {
+                        customDatetimeContainer.style.display = 'none';
+                        setCurrentTimeToInput();
+                    }
+                });
+            });
+
+            // 未入力チェック処理（新しい入力項目に対応）
+            function validateForm() {
+                const departure = document.getElementById("departure").value;
+                const arrival = document.getElementById("arrival").value;
+                const weather = document.getElementById("weather").value;
+                const datetimeMode = document.getElementById("datetime-mode").value;
+
+                // 出発・到着・天気が空の場合はブロック
+                if (departure === "" || arrival === "" || weather === "") {
+                    alert("出発・到着・天気を選択してください。");
+                    return false;
+                }
+
+                // 日時が「詳細入力」になっている場合、日時が空ならブロック
+                if (datetimeMode === "custom") {
+                    const customDatetime = document.getElementById("custom-datetime").value;
+                    if (customDatetime === "") {
+                        alert("詳細な日時を入力してください。");
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        </script>
     </body>
 </html>
