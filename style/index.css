@@ -461,8 +461,33 @@ p.sentence1 {
     display: block;
     margin: 0 10% 0 auto; /* 右側に10%の余白を取りつつ右寄せ */
 }
-.content1 a{
-    text-decoration: none;
+/* 最初は隠しておく設定 */
+.more-content {
+    display: none;
+    overflow: hidden;
+}
+
+/* ボタン内の矢印のスタイリング */
+.arrow-icon {
+    display: inline-block;
+    transition: transform 0.3s ease; /* 回転用のアニメーション */
+    margin-right: 5px;
+}
+
+/* 開いている時のボタン（JSでクラスを付与します） */
+.button_vm.is-open .arrow-icon {
+    transform: rotate(180deg); /* 矢印を逆にする */
+}
+
+/* 既存のbutton_vmのスタイルを少し調整（位置固定など） */
+.button_vm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 10% 0 auto;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
 :hover.button_vm {
