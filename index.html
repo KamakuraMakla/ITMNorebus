@@ -263,7 +263,7 @@
 
                     金閣寺へのアクセスは、この金閣寺道停留所が担っている。<br>
                     付近には鉄道駅はない。<br>
-                    近くても、北野白梅町(xxkm) や地下鉄北大路駅 (xxkm) である。<br>
+                    近くても、北野白梅町(1.4km) や地下鉄北大路駅 (2.6km) である。<br>
                     いずれも徒歩で行くには少々不便である。<br>
                     さらに、付近には立命館大学衣笠キャンパスもあり、生活と観光の動線が絡み合う場所でもある。<br>
                     金閣寺道から北野白梅町やJR線と乗り換えできる西ノ京円町まで満員ということもざらだろう。
@@ -461,7 +461,8 @@
                 <p class="sentence1">
                     また、現状、地下鉄を使って 230円以下で行けるのは、北は烏丸御池、南はくいな橋までである。<br>
                     JRであれば、太秦駅までは200円で行けて、途中、二条・円町等へはJRの方が安い。<br>
-                    嵯峨嵐山へは、JRの方が10円高い240円である。
+                    嵯峨嵐山へは、JRの方が10円高い240円である。<br>
+                    上の地図では、地下鉄、JR嵯峨野線で230円以内で行ける駅を可視化したマップである。
                 </p>
                 <a href="https://www.google.com/">
                     <button class="button_vm">→VIEWMORE</button>
@@ -570,7 +571,7 @@
                 <div></div>
                 <img src="assets/img/kiyomizudera.jpg" alt="清水寺" class="img1">
                 <p class="sentence1">
-                    京都駅→(JR奈良線)→東福寺駅→(京阪本線)→清水五条駅→(徒歩○○分)→清水寺<br>
+                    京都駅→(JR奈良線)→東福寺駅→(京阪本線)→清水五条駅→(徒歩25分)→清水寺<br>
                     早ければ9分程度で移動できる。
                 </p>
                 <a href="https://www.google.com/">
@@ -588,7 +589,6 @@
                 <img src="assets/img/kawaramachi.png" alt="河原町" class="img1">
                 <p class="sentence1">
                     京都駅→(地下鉄烏丸線)→四条(烏丸)→(阪急京都線)→京都河原町<br>
-                    早ければX分程度で移動できる。
                 </p>
                 <a href="https://www.google.com/">
                     <button class="button_vm">→VIEWMORE</button>
@@ -627,7 +627,14 @@
                 <h3 id="3.2" class="left">3.2京都ゆったりナビ</h3>
                 <img src="assets/img/bus_kinkakujimiti_206.jpg" alt="金閣寺道停留所" class="img1">
                 <div id="average_month_fig_out" class="graph_tmp"></div>
-                <p class="sentence1">サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル</p>
+                <p class="sentence1">
+                    上のグラフを見て分かる通り、混雑度(快適度)は、
+                    1年を通して変動し、さらに場所によっても大幅に異なる。<br>
+                    このような状況を加味した経路検索システムがなく、<br>
+                    例えば紅葉のシーズンなどでは、どのように京都を移動すれば混雑に巻き込まれづらいかがわからない。<br>
+                    そこで、この京都ゆったりナビを活用することで、比較的快適な移動プランを可視化することができる。<br>
+                    実際に使っていただければ、その威力は一目瞭然だろう。
+                </p>
                 <a href="https://www.google.com/">
                     <button class="button_vm">→VIEWMORE</button>
                 </a>
@@ -849,11 +856,34 @@
     </script>
 
     <script>
+        /*
         fetch("assets/json/バスの本数（上位200個）.json")
         .then(response => response.json())
         .then(data => {
             data = applyKyotoTheme(data);
+            
             Plotly.newPlot("bus_up200_fig_out", data.data, data.layout);
+        });
+        */
+       fetch("assets/json/バスの本数（上位200個）.json")
+        .then(r => r.json())
+        .then(data => {
+
+            const container = document.getElementById("bus_up200_fig_out");
+            const width = container.parentElement.clientWidth * 0.8; // 親の80%
+
+            const layout = {
+            ...data.layout,
+            width: width,
+            height: width * 0.8
+            };
+
+            Plotly.newPlot(
+            container,
+            data.data,
+            layout,
+            { responsive: true }
+            );
         });
     </script>
 
