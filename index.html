@@ -268,7 +268,6 @@
                 <h2>2. 京都の交通の今</h2>
                 <h3 class="left">2.1. バスの街、京都</h3>
                 <img src="assets/img/busstop_with_tower.jpg" alt="京都駅停留所" class="img1">
-                <div id="bus_up200_fig_out" class="graph_tmp"></div>
                 <div id="bus_all_fig_out" class="graph_tmp"></div>
                 <p class="sentence1">
                     京都の街には地下鉄が少ない。<br>
@@ -376,6 +375,7 @@
             </div>
         </section>
         <section class="contents centered_text">
+            <div id = "tourism_density_fig" class="graph_tmp"></div>
             <div class="content1">
                 <img src="assets/img/half_circle.png" alt="丸" class="circle">
                 <img src="assets/img/雲２.png" alt="雲" class="cloud3">
@@ -443,7 +443,7 @@
                 <img src="assets/img/half_circle.png" alt="丸" class="circle">
                 <img src="assets/img/雲２.png" alt="雲" class="cloud3">
                 <img src="assets/img/鶴.png" alt="鶴" class="crane2">
-                <div id="map_kyoto230yen"></div>
+                <div id="map_kyoto230yen" class="graph_tmp"></div>
                 <p class="sentence1">
                     また、現状、地下鉄を使って 230円以下で行けるのは、北は烏丸御池、南はくいな橋までである。<br>
                     JRであれば、太秦駅までは200円で行けて、途中、二条・円町等へはJRの方が安い。<br>
@@ -744,20 +744,146 @@
         });
     </script-->
 
-    
+    <script>
+        function applyKyotoTheme(figJson) {
+
+        const COLORS = {
+            bg: "#0d0d0d",
+            text: "#f8f4f6",
+            accent1: "#b22d1d",  // 赤
+            accent2: "#c5a059",  // 金
+            grid: "rgba(248,244,246,0.08)"
+        };
+
+        const layout0 = figJson.layout || {};
+
+        const layout = {
+            ...layout0,
+
+            paper_bgcolor: COLORS.bg,
+            plot_bgcolor: COLORS.bg,
+
+            font: {
+            ...(layout0.font || {}),
+            color: COLORS.text
+            },
+
+            xaxis: {
+            ...(layout0.xaxis || {}),
+            color: COLORS.text,
+            gridcolor: COLORS.grid,
+            zerolinecolor: COLORS.grid
+            },
+
+            yaxis: {
+            ...(layout0.yaxis || {}),
+            color: COLORS.text,
+            gridcolor: COLORS.grid,
+            zerolinecolor: COLORS.grid
+            },
+
+            legend: {
+            ...(layout0.legend || {}),
+            bgcolor: "rgba(0,0,0,0)",
+            font: { color: COLORS.text }
+            }
+        };
+
+        // データ側の色も上書き（バー・線）
+        const data = (figJson.data || []).map((trace, i) => {
+
+            const accent = i % 2 === 0 ? COLORS.accent1 : COLORS.accent2;
+
+            if (trace.type === "bar") {
+            return {
+                ...trace,
+                marker: {
+                ...(trace.marker || {}),
+                color: accent
+                }
+            };
+            }
+
+            if (trace.type === "scatter") {
+            return {
+                ...trace,
+                line: {
+                ...(trace.line || {}),
+                color: accent,
+                width: 3
+                },
+                marker: {
+                ...(trace.marker || {}),
+                color: accent
+                }
+            };
+            }
+
+            return trace;
+        });
+
+        return { data, layout };
+        }
+    </script>
     <script>
         fetch("assets/json/kyoto_tourism_graph.json")
         .then(response => response.json())
         .then(data => {
+            data = applyKyotoTheme(data);
             Plotly.newPlot("num_tourists_fig_out", data.data, data.layout);
         });
     </script>
 
-    <script>
+    <!--script>
+        /*
         fetch("assets/json/バスの本数（上位200個）.json")
         .then(response => response.json())
         .then(data => {
             Plotly.newPlot("bus_up200_fig_out", data.data, data.layout);
+        });
+        */
+       fetch("assets/json/バスの本数（上位200個）.json")
+        .then(response => response.json())
+        .then(data => {
+
+            const darkLayout = {
+            ...data.layout,
+
+            paper_bgcolor: "#0f172a",   // 外側背景
+            plot_bgcolor:  "#0f172a",   // グラフ背景
+
+            font: {
+                ...(data.layout?.font || {}),
+                color: "#e5e7eb"
+            },
+
+            xaxis: {
+                ...(data.layout?.xaxis || {}),
+                color: "#e5e7eb",
+                gridcolor: "rgba(255,255,255,0.08)",
+                zerolinecolor: "rgba(255,255,255,0.15)"
+            },
+
+            yaxis: {
+                ...(data.layout?.yaxis || {}),
+                color: "#e5e7eb",
+                gridcolor: "rgba(255,255,255,0.08)",
+                zerolinecolor: "rgba(255,255,255,0.15)"
+            },
+
+            legend: {
+                ...(data.layout?.legend || {}),
+                bgcolor: "rgba(0,0,0,0)",
+                font: { color: "#e5e7eb" }
+            }
+            };
+
+            Plotly.newPlot(
+            "bus_up200_fig_out",
+            data.data,
+            darkLayout,
+            { responsive: true }
+            );
         });
     </script>
 
@@ -767,7 +893,7 @@
         .then(data => {
             Plotly.newPlot("bus_all_fig_out", data.data, data.layout);
         });
-    </script>
+    </script-->
 
     <script>
         fetch("assets/json/乗客者グラフ.json")
@@ -874,13 +1000,21 @@
         });
     </script>
 
-     <script>
+     <!--script>
         fetch("assets/json/kyoto_230yen_fig.json")
         .then(response => response.json())
         .then(data => {
             Plotly.newPlot("map_kyoto230yen", data.data, data.layout);
         });
-    </script>
+    </script-->
+
+    <!--script>
+        fetch("assets/json/kyoto_kankouchi_density_fig.json")
+        .then(response => response.json())
+        .then(data => {
+            Plotly.newPlot("tourism_density_fig", data.data, data.layout);
+        });
+    </script-->
 
 </html>
 

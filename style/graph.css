@@ -2,8 +2,16 @@
 /*
     グラフに関するCSS
 */
-.graph_tmp {
-    width: 100% !important;
-    max-width: 800px !important;
-    height: 450px !important;
+/* 親幅からはみ出さないように Plotly の内部コンテナを強制的に 100% にする */
+.graph_tmp .js-plotly-plot,
+.graph_tmp .plot-container,
+.graph_tmp .svg-container{
+  width: 90% !important;
+  max-width: 90% !important;
+}
+
+/* 念のため、SVG/Canvasも縮める（これで横はみ出しが止まる） */
+.graph_tmp svg,
+.graph_tmp canvas{
+  max-width: 90% !important;
 }
