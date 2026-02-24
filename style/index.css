@@ -7,6 +7,8 @@ body {
     background-color: #0d0d0d;
     line-height: 1.0;
     width: 100%;
+    margin: 0;
+    overflow-x: hidden !important;
 }
 
 
@@ -76,7 +78,7 @@ section.title h3 {
 
 .cloud2 {
     position: absolute;
-    right: -.5rem;
+    right: 0rem;
     top: 20rem;
     width: 15rem;
 }
@@ -96,7 +98,7 @@ section.explanation {
     position: relative;
     z-index: 1;
     margin-top: 30rem;
-    width: 100vw;
+    width: 100%;
     background: linear-gradient(#0d0d0d, #f8f4f6,#0d0d0d,#0d0d0d);
 }                  
 /*
@@ -125,7 +127,7 @@ section.explanation p {
 
 .background {
     display: block;
-    width: 100vw;   /* 横幅を親要素に合わせる */
+    width: 100%;   /* 横幅を親要素に合わせる */
     height: auto;  /* 高さは自動（比率を維持） */
 }
 
@@ -134,36 +136,20 @@ section.explanation p {
     position: absolute; 
     top: 40rem; /* ★元の35remだと下に寄りすぎてINDEXが画像からはみ出る可能性があるため数値を小さくしました。お好みの位置に調整してください */
     left: 0;          
-    width: 100vw;        
+    width: 100%;        
     z-index: 20;
     display: flex;
     flex-direction: column;
     align-items: center; /* 左右中央揃え */
 }
 
-/* はじめにの文章とINDEXの間の余白を調整 */
-.index-wrapper {
-    margin-top: 2rem; 
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-/* 画像を背後に固定 
-.background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    object-fit: contain; 
-    z-index: 10; 
-    pointer-events: none; 
-}*/
 
 /* --- INDEXセクションのスタイル --- */
 .index-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    
     margin-top: 5rem; /* 「はじめに」からの余白 */
     margin-bottom: 60px; /* 次のセクションへの余白 */
     padding: 0 20px;
@@ -172,8 +158,7 @@ section.explanation p {
 .index-container {
     border: 3px solid #bda85e; /* 金色の枠線 */
     padding: 40px 30px;
-    width: 100%;
-    max-width: 450px;
+    width: 90vw;
     box-sizing: border-box;
     font-family: "Yu Mincho", "游明朝", "MS Mincho", serif; /* 明朝体 */
     color: #ffffff;
@@ -462,7 +447,12 @@ p.sentence1 {
     background-color: #f8f4f6;
     border: none;
     border-radius: 0.3rem;
-    right: -25%;
+    /* right: -25%; を削除し、以下のように変更 */
+    display: block;
+    margin: 0 10% 0 auto; /* 右側に10%の余白を取りつつ右寄せ */
+}
+.content1 a{
+    text-decoration: none;
 }
 
 :hover.button_vm {
@@ -492,7 +482,7 @@ p.sentence1 {
 .crane2{
     position: absolute;
     z-index: 10;
-    left: 43%;
+    left: 35%;
     top: 100%;
-    width: 70%;
+    width: 65%;
 }
