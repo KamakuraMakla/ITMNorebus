@@ -6,6 +6,7 @@ body {
     color: #f8f4f6;
     background-color: #0d0d0d;
     line-height: 1.0;
+    width: 100%;
 }
 
 
@@ -433,23 +434,23 @@ p.sentence1,
 }
 
 .contents h2{
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #0d0d0d;
     background-color: #f8f4f6;
     width: fit-content;
     margin: 2.3rem auto;  
-    padding: 2rem;
+    padding: 1rem;
     white-space: nowrap;
 }
 
 .contents h3{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 p.sentence1 {
     width: 80%;
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 2rem auto;
     line-height: 1.5rem;
 }
@@ -475,9 +476,9 @@ p.sentence1 {
 .circle {
     position: absolute;
     z-index: 10;
-    left: 50%;
+    right: 0%;
     top: -8%;
-    width: 75%;
+    width: 70%;
 }
 
 .cloud3{
