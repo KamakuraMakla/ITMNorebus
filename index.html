@@ -851,79 +851,29 @@
         });
     </script>
 
-    <!--script>
-        /*
+    <script>
         fetch("assets/json/バスの本数（上位200個）.json")
         .then(response => response.json())
         .then(data => {
+            data = applyKyotoTheme(data);
             Plotly.newPlot("bus_up200_fig_out", data.data, data.layout);
         });
-        */
-       fetch("assets/json/バスの本数（上位200個）.json")
-        .then(response => response.json())
-        .then(data => {
-
-            const darkLayout = {
-            ...data.layout,
-
-            paper_bgcolor: "#0f172a",   // 外側背景
-            plot_bgcolor:  "#0f172a",   // グラフ背景
-
-            font: {
-                ...(data.layout?.font || {}),
-                color: "#e5e7eb"
-            },
-
-            xaxis: {
-                ...(data.layout?.xaxis || {}),
-                color: "#e5e7eb",
-                gridcolor: "rgba(255,255,255,0.08)",
-                zerolinecolor: "rgba(255,255,255,0.15)"
-            },
-
-            yaxis: {
-                ...(data.layout?.yaxis || {}),
-                color: "#e5e7eb",
-                gridcolor: "rgba(255,255,255,0.08)",
-                zerolinecolor: "rgba(255,255,255,0.15)"
-            },
-
-            legend: {
-                ...(data.layout?.legend || {}),
-                bgcolor: "rgba(0,0,0,0)",
-                font: { color: "#e5e7eb" }
-            }
-            };
-
-            Plotly.newPlot(
-            "bus_up200_fig_out",
-            data.data,
-            darkLayout,
-            { responsive: true }
-            );
-        });
     </script>
-
-    <script>
-        fetch("assets/json/バスの本数（全部）.json")
-        .then(response => response.json())
-        .then(data => {
-            Plotly.newPlot("bus_all_fig_out", data.data, data.layout);
-        });
-    </script-->
 
     <script>
         fetch("assets/json/乗客者グラフ.json")
         .then(response => response.json())
         .then(data => {
+            data = applyKyotoTheme(data);
             Plotly.newPlot("num_bus_user_fig_out", data.data, data.layout);
         });
     </script>
 
-    <script>
+    <!--script>
         fetch("assets/json/京都駅前バス乗り場の快適度.json")
         .then(response => response.json())
         .then(data => {
+            data = applyKyotoTheme(data);
             Plotly.newPlot("kyotost_busstop_fig_out", data.data, data.layout);
         });
     </script>
@@ -1006,13 +956,14 @@
         .then(data => {
             Plotly.newPlot("kinkakujimiti_fig_out", data.data, data.layout);
         });
-    </script>
+    </script-->
 
     
     <script>
         fetch("assets/json/観光地別_月ごと平均快適度.json")
         .then(response => response.json())
         .then(data => {
+            data = applyKyotoTheme(data);
             Plotly.newPlot("average_month_fig_out", data.data, data.layout);
         });
     </script>
@@ -1021,6 +972,7 @@
         fetch("assets/json/kyoto_230yen_fig.json")
         .then(response => response.json())
         .then(data => {
+            //data = applyKyotoTheme(data);
             Plotly.newPlot("map_kyoto230yen", data.data, data.layout);
         });
     </script>
