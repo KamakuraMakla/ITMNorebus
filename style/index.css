@@ -2,7 +2,7 @@
 ---------------------------------*/
 
 body {
-    font-family: "MS明朝","Zen Antique";
+    font-family: "Yu Mincho", "游明朝", "MS Mincho", serif; /* 明朝体 */
     color: #f8f4f6;
     background-color: #0d0d0d;
     line-height: 1.0;
@@ -15,6 +15,10 @@ body {
 
 .centered_text {
     text-align: center;
+}
+
+a{
+    text-decoration: none;
 }
 
 /* タイトル
@@ -34,11 +38,12 @@ section.title .subtitle {
     padding: .7rem;
     padding-left: 3rem;
     padding-right: 1rem;
+    font-family: "yu gothic medium", "Yu Gothic Medium", "游ゴシック Medium", "YuGothic Medium", sans-serif;
 }
 
 h3.leftside{
     position: absolute;
-    left: 3.5rem;
+    left: 2.5rem;
     top: 14rem;
 }
 
@@ -145,6 +150,9 @@ section.explanation p {
 
 
 /* --- INDEXセクションのスタイル --- */
+.index-wrapper a{
+    color: #f8f4f6; 
+}
 .index-wrapper {
     display: flex;
     justify-content: center;
@@ -420,6 +428,7 @@ p.sentence1,
 
 .contents h2{
     font-size: 2rem;
+    font-family: "yu gothic medium", "Yu Gothic Medium", "游ゴシック Medium", "YuGothic Medium", sans-serif;
     color: #0d0d0d;
     background-color: #f8f4f6;
     width: fit-content;
