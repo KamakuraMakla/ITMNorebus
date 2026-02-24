@@ -403,3 +403,76 @@ body {
 .bus-route-display .form-group {
     margin-bottom: 20px;
 }
+
+/* =======================================
+   戻るボタン（左下）
+======================================= */
+/* ボタンをコンテナの左下に配置するためのラッパー */
+.back-btn-wrapper {
+    margin-top: 15px; /* 上の金枠コンテナとの隙間 */
+    display: flex;
+    justify-content: flex-start; /* 左寄せ */
+}
+
+/* ボタン本体の装飾 */
+.btn-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    background-color: #922b20; /* えんじ色 */
+    border: 2px solid #bda85e; /* 金色の枠線 */
+    border-radius: 12px; /* 少し丸みを帯びた四角 */
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+/* ホバー時の動き */
+.btn-back:hover {
+    background-color: #a63326;
+    transform: translateY(-2px);
+}
+
+/* 金色の「く」の字アイコン（CSSだけで描画） */
+.btn-back .chevron-left {
+    width: 14px;
+    height: 14px;
+    border-top: 3px solid #bda85e;
+    border-left: 3px solid #bda85e;
+    transform: rotate(-45deg); /* 四角の枠を傾けて「く」にする */
+    margin-left: 6px; /* 視覚的にど真ん中に来るように微調整 */
+}
+
+/* 乗車人数の入力ボックスを他のプルダウンと同じサイズにする */
+.select-wrapper input[type="number"] {
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 0 15px; /* 右側の余白は「くの字」がない分、少し調整 */
+    font-family: inherit;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* フォーカス時の枠線（他のプルダウンと合わせる） */
+.select-wrapper input[type="number"]:focus {
+    outline: 2px solid #bda85e;
+}
+
+/* 乗車人数の時だけ「金のくの字」を消すための専用クラス */
+.select-wrapper.no-arrow::after {
+    display: none;
+}
+
+/* (任意) 数字入力の横に出てくるスピンボタン（上下矢印）を消したい場合 */
+.select-wrapper input[type="number"]::-webkit-inner-spin-button,
+.select-wrapper input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

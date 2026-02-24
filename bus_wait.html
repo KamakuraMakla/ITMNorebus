@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>乗れるバス、何本後？</title>
         <link rel="stylesheet" href="style/yuttarinavi.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js"></script>
+        <script src="./src/queue_est.js" defer></script>
     </head>
     <body>
         <div class="navi-wrapper">
@@ -13,16 +16,28 @@
                 <header class="navi-header bus-wait-header">
                     <h1>乗れるバス、<br>何本後？</h1>
                 </header>
+                <div id = "result_box" style="display: none;">
+                    <div class="result-title-box">
+                        <h2>結果</h2>
+                    </div>
 
-                <form class="navi-form bus-wait-form" action="#" method="get">
-                    
+                    <div class="bus-result-message" id = "result">
+                        <!--p>あなたが<br>乗れるバスは、</p>
+                        <div class="highlight-buses">
+                            <span class="circle-placeholder">〇</span>
+                            <span class="text-suffix">本後です</span>
+                        </div-->
+                    </div>
+                </div>
+                <div class="navi-form bus-wait-form">
+                    <div id="status-area" class="loading">データを読み込み中...</div>
                     <div class="form-group">
                         <label for="departure">出発</label>
                         <div class="select-wrapper">
                             <select id="departure" name="departure">
-                                <option value=""></option>
-                                <option value="kyoto">京都駅</option>
-                                <option value="kiyomizumichi">清水道</option>
+                                <option value="">--停留所を選択してください--</option>
+                                <!--option value="kyoto">京都駅</option>
+                                <option value="kiyomizumichi">清水道</option-->
                             </select>
                         </div>
                     </div>
@@ -31,9 +46,9 @@
                         <label for="route">系統</label>
                         <div class="select-wrapper">
                             <select id="route" name="route">
-                                <option value=""></option>
-                                <option value="206">206号系統</option>
-                                <option value="5">5号系統</option>
+                                <option value="">-- 先に停留所を選んでください --</option>
+                                <!--option value="206">206号系統</option>
+                                <option value="5">5号系統</option-->
                             </select>
                         </div>
                     </div>
@@ -43,32 +58,41 @@
                         <div class="select-wrapper">
                             <select id="queue" name="queue">
                                 <option value="" selected>前に--人</option>
+                                <option value="0">前に0人</option>
+                                <option value="5">前に5人</option>
                                 <option value="10">前に10人</option>
                                 <option value="20">前に20人</option>
                                 <option value="30">前に30人</option>
+                                <option value="50">前に50人</option>
+                                <option value="100">前に100人</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="passengers" class="label-multiline"><span>乗車<br>人数</span></label>
-                        <div class="select-wrapper">
-                            <select id="passengers" name="passengers">
+                        <div class="select-wrapper no-arrow">
+                            <!--select id="passengers" name="passengers">
                                 <option value="" selected>一度に--人</option>
                                 <option value="1">一度に1人</option>
                                 <option value="2">一度に2人</option>
                                 <option value="3">一度に3人</option>
                                 <option value="4">一度に4人</option>
-                            </select>
+                            </select-->
+                            <input type="number" id="capacity" value="30" min="1" max = "100">
                         </div>
                     </div>
 
                     <div class="submit-wrapper">
-                        <button type="submit" class="btn-submit">検索</button>
+                        <button class="btn-submit" id = "calcBtn">検索</button>
                     </div>
 
                 </form>
             </div>
+            <div class="back-btn-wrapper">
+                <a href="index.html" class="btn-back">
+                    <span class="chevron-left"></span>
+                </a>
         </div>
     </body>
 </html>
