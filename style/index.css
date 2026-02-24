@@ -525,3 +525,9 @@ p.sentence1 {
     top: 100%;
     width: 65%;
 }
+
+.stress{
+    background-color: #9e2a1f;
+    color: #f8f4f6;
+    border: 2px solid #c5a059;
+}
