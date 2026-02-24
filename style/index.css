@@ -413,13 +413,17 @@ p.sentence1,
 /*統計１*/
 .content1{
     position: relative;
-    margin-bottom: 45rem;
+    margin-bottom: 20rem;
 }
 
 .img1 {
     width: 65%;
     /*display: block;
     margin: 0 auto;*/
+}
+.graph_tmp{
+    position: relative;
+    z-index: 20;
 }
 
 .left{
