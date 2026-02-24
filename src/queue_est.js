@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     //const controls = document.getElementById('controls');
 
     try {
-        const base = "../assets/gtfs/"; 
+        const base = "./assets/gtfs/"; 
         const [r, t, s, st, c, cd] = await Promise.all([
             fetchCSV(base + "routes.txt"),
             fetchCSV(base + "trips.txt"),
