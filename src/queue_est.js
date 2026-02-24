@@ -1,3 +1,4 @@
+/*
 const DateTime = luxon.DateTime;
 let gtfs = { routes: [], trips: [], stop_times: [], stops: [], calendar: [], calendar_dates: [] };
 
@@ -179,4 +180,133 @@ document.getElementById('calcBtn').addEventListener('click', () => {
         `;
 
     }
+});
+*/
+// もうGTFSをブラウザでパースしないので、Papa / Luxon は不要です。
+
+async function apiGet(params) {
+  const qs = new URLSearchParams(params);
+  const res = await fetch(`https://cloverfes.com/opendata_test/norebus.php?${qs.toString()}`, { cache: "no-store" });
+  const json = await res.json().catch(() => null);
+  console.log(json);
+  if (!json || !json.ok) {
+    const msg = json?.error ?? `API error (${res.status})`;
+    throw new Error(msg);
+  }
+  return json.data;
+}
+
+window.addEventListener("DOMContentLoaded", async () => {
+  const statusArea = document.getElementById("status-area");
+  const stopSel = document.getElementById("departure");
+  const routeSel = document.getElementById("route");
+
+  // 初期状態
+  routeSel.innerHTML = '<option value="">-- 系統を選択してください --</option>';
+  routeSel.disabled = true;
+
+  try {
+    // stops取得
+    const data = await apiGet({ action: "stops" });
+
+    // 既存optionをクリア（もしHTML側に初期optionがあるなら）
+    // stopSel.innerHTML = '<option value="">-- 出発停留所を選択してください --</option>';
+
+    data.stops.forEach((name) => {
+      stopSel.add(new Option(name, name));
+    });
+
+    statusArea.style.display = "none";
+  } catch (e) {
+    statusArea.className = "error";
+    statusArea.innerText = "❌ データのロードに失敗しました。";
+    console.error(e);
+  }
+});
+
+// 停留所変更 → 系統リスト
+document.getElementById("departure").addEventListener("change", async function () {
+  const stopName = this.value;
+  const routeSel = document.getElementById("route");
+
+  routeSel.innerHTML = '<option value="">-- 系統を選択してください --</option>';
+  routeSel.disabled = true;
+
+  if (!stopName) return;
+
+  try {
+    const data = await apiGet({ action: "routes", stopName });
+
+    data.routes.forEach((r) => {
+      routeSel.add(new Option(r.label, r.route_id));
+    });
+
+    routeSel.disabled = false;
+  } catch (e) {
+    console.error(e);
+    // UIに出したいならここで表示
+  }
+});
+
+// 計算ボタン
+document.getElementById("calcBtn").addEventListener("click", async () => {
+  const stopName = document.getElementById("departure").value;
+  const routeId = document.getElementById("route").value;
+  const queue = parseInt(document.getElementById("queue").value, 10);
+  const capacity = parseInt(document.getElementById("capacity").value, 10);
+
+  const resDiv = document.getElementById("result");
+  const box = document.getElementById("result_box");
+
+  if (!stopName || !routeId) return;
+  if (!Number.isFinite(queue) || queue < 0) {
+    resDiv.innerText = "行列人数が不正です。";
+    box.style.display = "block";
+    return;
+  }
+  if (!Number.isFinite(capacity) || capacity <= 0) {
+    resDiv.innerText = "定員が不正です。";
+    box.style.display = "block";
+    return;
+  }
+
+  try {
+    const data = await apiGet({
+      action: "calc",
+      stopName,
+      routeId,
+      queue: String(queue),
+      capacity: String(capacity),
+    });
+
+    box.style.display = "block";
+
+    if (data.status === "finished") {
+      resDiv.innerHTML = data.message ?? "本日の運行は終了しました。";
+      return;
+    }
+
+    if (data.status === "overflow") {
+      resDiv.innerHTML = data.message ?? "非常に長い行列です。";
+      return;
+    }
+
+    // status === "ok"
+    const idx = (data.targetBusIndex ?? 0) + 1;
+    const waitMin = data.waitMin ?? 0;
+    const time = data.targetTime ?? "--:--:--";
+    const yourPos = data.yourPosition ?? (queue + 1);
+
+    resDiv.innerHTML = `
+      <div class="bus-result-message">
+        あなたは <div class="highlight-buses"><span class="circle-placeholder">${idx}</span> 台目</div> のバスに乗れる見込みです。<br>
+        <div class="estimated-time">到着予定: ${time} (約 <b>${waitMin} 分後</b>)</div><br>
+        <small>※あなたの位置: ${yourPos}番目 / バス1台の空き: ${capacity}名</small>
+      </div>
+    `;
+  } catch (e) {
+    console.error(e);
+    box.style.display = "block";
+    resDiv.innerHTML = "❌ 計算に失敗しました。";
+  }
 });
