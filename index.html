@@ -874,38 +874,13 @@
         });
     </script>
 
-    
-    <script>
-        const stations = [
-        {name:"京都駅", line:"JR/地下鉄", lat:34.985444, lon:135.757778},
-        {name:"太秦（JR嵯峨野線）", line:"JR嵯峨野線", lat:35.0170889, lon:135.7013083},
-        {name:"烏丸御池（地下鉄）", line:"地下鉄", lat:35.0104, lon:135.7598},
-        {name:"くいな橋（地下鉄）", line:"地下鉄", lat:34.9627, lon:135.7574},
-        ];
-
-        const trace = {
-        type: "scattermapbox",
-        mode: "markers+text",
-        lat: stations.map(s => s.lat),
-        lon: stations.map(s => s.lon),
-        text: stations.map(s => s.name),
-        textposition: "top center",
-        hovertext: stations.map(s => `${s.name}<br>${s.line}`),
-        hoverinfo: "text",
-        marker: { size: 12 }
-        };
-
-        const layout = {
-        mapbox: {
-            style: "open-street-map",
-            center: {lat: 34.99, lon: 135.75},
-            zoom: 12
-        },
-        margin: {l:0, r:0, t:0, b:0}
-        };
-
-        Plotly.newPlot("map_kyoto230yen", [trace], layout, {displayModeBar: true});
-     </script>
+     <script>
+        fetch("assets/json/kyoto_230yen_fig.json")
+        .then(response => response.json())
+        .then(data => {
+            Plotly.newPlot("map_kyoto230yen", data.data, data.layout);
+        });
+    </script>
 
 </html>
 
