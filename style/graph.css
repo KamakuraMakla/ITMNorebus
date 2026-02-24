@@ -2,6 +2,7 @@
 /*
     グラフに関するCSS
 */
+
 /* 親幅からはみ出さないように Plotly の内部コンテナを強制的に 100% にする */
 .graph_tmp .js-plotly-plot,
 .graph_tmp .plot-container,
