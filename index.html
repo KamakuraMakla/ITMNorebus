@@ -401,6 +401,7 @@
                 <div id="bus_up200_fig_out" class="graph_tmp"></div>
                 <div id="bus_all_fig_out" class="graph_tmp"></div>
                 <p class="sentence1">
+                    上の図は、平日・土休日すべて含めたバスの発着本数の総和を出し、利用者数/発着本数総和を効率として表示するものである。<br>
                     さらに、観光地付近の渋滞状況を見てみると、清水寺といった東山地域において、観光シーズンや土休日を中心に慢性的な渋滞が発生しているということが分かる。<br>
                     これが、バスの遅延や混雑に拍車をかけている。<br>
                     <br>
@@ -817,7 +818,7 @@
             Plotly.newPlot("bus_up200_fig_out", data.data, data.layout);
         });
         */
-       fetch("assets/json/バスの本数（上位200個）.json")
+       fetch("assets/json/bus_map_fig.json")
         .then(r => r.json())
         .then(data => {
 
