@@ -21,7 +21,7 @@ function getComfortRate(spotName, hour) {
 }
 
 const subwayComfortRates = {
-    '京都(地下鉄)': 5, '五条(地下鉄)': 3, '四条(地下鉄)': 5, '丸太町(地下鉄)': 2, '今出川(地下鉄)': 2,
+    '京都(地下鉄)': 2, '五条(地下鉄)': 1, '四条(地下鉄)': 2, '丸太町(地下鉄)': 1, '今出川(地下鉄)': 1,
     '鞍馬口(地下鉄)': 1, '北大路(地下鉄)': 1, '北山(地下鉄)': 1, '松ヶ崎(地下鉄)': 1, '国際会館(地下鉄)': 1,
     '太秦天神川(地下鉄)': 1, '西大路御池(地下鉄)': 1, '二条(地下鉄)': 1, '二条城前(地下鉄)': 1,
     '京都市役所前(地下鉄)': 1, '三条京阪(地下鉄)': 1, '東山(地下鉄)': 1, '蹴上(地下鉄)': 1, '御陵(地下鉄)': 1
@@ -29,9 +29,9 @@ const subwayComfortRates = {
 
 function getSubwayComfortRate(fromNode, toNode) {
     if (toNode === '烏丸御池(地下鉄)') {
-        if (fromNode === '丸太町(地下鉄)' || fromNode === '四条(地下鉄)') return 5;
-        else if (fromNode === '二条城前(地下鉄)' || fromNode === '京都市役所前(地下鉄)') return 2;
-        return 5;
+        if (fromNode === '丸太町(地下鉄)' || fromNode === '四条(地下鉄)') return 1;
+        else if (fromNode === '二条城前(地下鉄)' || fromNode === '京都市役所前(地下鉄)') return 1;
+        return 1;
     }
     return subwayComfortRates[toNode] || 1.0;
 }
