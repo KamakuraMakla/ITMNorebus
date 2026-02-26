@@ -531,3 +531,13 @@ p.sentence1 {
     color: #f8f4f6;
     border: 2px solid #c5a059;
 }
+
+.data-list
+{
+    position: relative;
+    z-index: 9999;
+    margin: 2pt;
+    padding: 2pt;
+    background-color: white;
+    color: black;
+}
