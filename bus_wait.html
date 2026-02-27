@@ -6,6 +6,7 @@
         <title>乗れるバス、何本後？</title>
         <link rel="stylesheet" href="style/yuttarinavi.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js"></script>
+        <script src="./src/tools.js"></script>
         <script src="./src/queue_est.js" defer></script>
     </head>
     <body>
@@ -45,11 +46,11 @@
                             </select>
                         </div>
                     </div>
-
+                    <small>画像からも、並んでいる人数を推定できます。</small>
                     <div class="form-group">
                         <label for="queue">並び</label>
-                        <div class="select-wrapper">
-                            <select id="queue" name="queue" required>
+                        <div class="select-wrapper no-arrow">
+                            <!--select id="queue" name="queue" required>
                                 <option value="" selected>前に--人</option>
                                 <option value="0">前に0人</option>
                                 <option value="5">前に5人</option>
@@ -58,8 +59,18 @@
                                 <option value="30">前に30人</option>
                                 <option value="50">前に50人</option>
                                 <option value="100">前に100人</option>
-                            </select>
+                            </select-->
+                            <input type = "number" id = "queue" name = "queue" min = "0" max = "300" required>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="queue">画像</label>
+                        <div class="select-wrapper">
+                            <input type = "file" id = "img_queue">
+                        </div>
+                    </div>
+                    <div class="form-group" style="height: auto;">
+                        <img id="resultImg" style="width: 100%;" />
                     </div>
 
                     <div class="form-group">

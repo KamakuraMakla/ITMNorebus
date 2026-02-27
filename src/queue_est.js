@@ -128,7 +128,7 @@ async function initSearchPage() {
     const dest = destSel.value;
     const queue = document.getElementById("queue").value;
     const capacity = document.getElementById("capacity").value;
-
+    
     if (!station || !routeId || !dest || !queue || !capacity) return;
 
     const params = new URLSearchParams({
@@ -140,6 +140,7 @@ async function initSearchPage() {
     });
 
     window.location.href = `ans_bus_wait.html?${params.toString()}`;
+    
   });
 }
 
@@ -224,3 +225,12 @@ async function initResultPage() {
     timeArea.innerHTML = "";
   }
 }
+
+document.getElementById("img_queue").addEventListener("change", e => {
+  const img = document.getElementById("img_queue").files[0];
+  if(img)
+  {
+    console.log(img);
+    sendImage(img, DEFAULT_URL);
+  }
+});
