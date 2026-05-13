@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+.route-output-area {
+    margin: 30px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(189, 168, 94, 0.5);
+    border-radius: 8px;
+}
+.route-node { display: flex; align-items: center; margin: 8px 0; }
+.node-type {
+    padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold;
+    margin-right: 15px; color: #ffffff; width: 65px; text-align: center; flex-shrink: 0;
+}
+.type-bus { background-color: #2E7D32; }
+.type-subway { background-color: #1565C0; }
+.type-tourist { background-color: #C62828; }
+
+.route-arrow { margin-left: 37px; color: #bda85e; font-size: 1.2rem; margin-bottom: 5px; }
+.route-stay { margin-left: 37px; font-size: 0.9rem; color: #cccccc; margin-bottom: 5px; }
+
+/* たたむ（details）の設定 */
+.minor-nodes-wrapper {
+    margin: 10px 0;
+    border-left: 2px dashed rgba(189, 168, 94, 0.3);
+    margin-left: 37px;
+    padding-left: 10px;
+}
+details summary {
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #bda85e;
+    list-style: none; /* デフォルトの矢印を消す（一部ブラウザ） */
+    outline: none;
+    padding: 5px 0;
+}
+details summary::-webkit-details-marker { display: none; } /* Safari用矢印消し */
+details summary::before {
+    content: "▶ ";
+    font-size: 0.7rem;
+}
+details[open] summary::before {
+    content: "▼ ";
+}
+
+.diff-notice {
+    font-size: 0.85rem; color: #f8db70; margin-left: 37px; margin-bottom: 15px;
+    border-left: 2px solid #bda85e; padding-left: 10px;
+}
+.score-details-box {
+    margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1);
+    border: 1px dashed rgba(255, 255, 255, 0.3); border-radius: 5px; text-align: center;
+}
