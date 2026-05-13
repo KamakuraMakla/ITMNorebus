@@ -1,6 +1,6 @@
 //coding: utf-8
 //sendImage
-const DEFAULT_URL = "https://kyotonorebus.kamakuramakla.org/norebus.php?action=count";
+const DEFAULT_URL = "https://kyotonorebus.kamakuramakla.org/norebus.php/count";
 
 async function sendImage(file, url) {
   const formData = new FormData();
