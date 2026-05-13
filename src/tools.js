@@ -1,6 +1,6 @@
 //coding: utf-8
 //sendImage
-DEFAULT_URL = "http://localhost:5000/count";
+DEFAULT_URL = `${window.location.origin}/count`;
 
 async function sendImage(file, url) {
   const formData = new FormData();
