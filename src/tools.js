@@ -21,7 +21,7 @@ console.log("person count:", count);
 document.getElementById("queue").textContent = count ?? 0;
 
 if (imageBase64) {
-  document.querySelector("#result-image").src =
+  document.getElementById("resultImg").src =
     `data:image/jpeg;base64,${imageBase64}`;
 }
 
