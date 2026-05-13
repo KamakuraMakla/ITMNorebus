@@ -2,7 +2,7 @@
 // - station_lists/*.json を読まない
 // - stops/routes/destinations/calc を norebus.php から取得する
 
-const API_BASE = "https://cloverfes.com/opendata_test/norebus.php"; // 例: "/opendata_test/norebus.php" などに変更
+const API_BASE = "https://kyotonorebus.kamakuramakla.org/norebus.php"; // 例: "/opendata_test/norebus.php" などに変更
 
 document.addEventListener("DOMContentLoaded", () => {
   const isSearchPage = document.getElementById("searchForm") !== null;
