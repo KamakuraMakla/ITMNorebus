@@ -18,7 +18,7 @@ const imageBase64 = json.data?.image_b64_jpg;
 
 console.log("person count:", count);
 
-document.querySelector("#person-count").textContent = count ?? 0;
+document.getElementById("queue").textContent = count ?? 0;
 
 if (imageBase64) {
   document.querySelector("#result-image").src =
