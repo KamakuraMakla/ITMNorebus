@@ -25,5 +25,5 @@ if (imageBase64) {
     `data:image/jpeg;base64,${imageBase64}`;
 }
 
-  document.getElementById("queue").value = data.count;
+  document.getElementById("queue").value = count;
 }
